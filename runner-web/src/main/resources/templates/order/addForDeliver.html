@@ -102,31 +102,42 @@
 </head>
 
 <body>
-<form class="form-signin" th:action="@{/publiz/login}" method="post">
+<form class="form-signin" th:action="@{/order/addForDeliver}" method="post">
     <div class="text-center mb-4">
-        <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72"/>
-        <h1 class="h3 mb-3 font-weight-normal">用户登录</h1>
+        <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72"
+             height="72"/>
+        <h1 class="h3 mb-3 font-weight-normal">下单页面(帮我买)</h1>
         <p>Build form controls with floating labels via the <code>:placeholder-shown</code> pseudo-element. <a
                 href="https://caniuse.com/#feat=css-placeholder-shown">Works in latest Chrome, Safari, and Firefox.</a>
         </p>
         <div th:if="${errorMsg} != null" class="alert alert-danger" th:html="${errorMsg}"></div>
     </div>
     <div class="form-label-group">
-        <input type="text" id="username" name="username" class="form-control" placeholder="Email address"/>
-        <label for="username">登录账号</label>
+        <input type="text" id="consigner" name="consigner" class="form-control" placeholder="Email address"/>
+        <label for="consigner">送货人姓名</label>
+    </div>
+    <div class="form-label-group">
+        <input type="text" id="consignerMobile" name="consignerMobile" class="form-control"
+               placeholder="Email address"/>
+        <label for="consignerMobile">送货人电话</label>
     </div>
 
     <div class="form-label-group">
-        <input type="password" id="password" name="password" class="form-control" placeholder="Password"/>
-        <label for="password">登录密码</label>
+        <input type="text" id="consignee" name="consignee" class="form-control" placeholder="Email address"/>
+        <label for="consignee">收货人姓名</label>
+    </div>
+    <div class="form-label-group">
+        <input type="text" id="consigneeMobile" name="consigneeMobile" class="form-control"
+               placeholder="Email address"/>
+        <label for="consigneeMobile">收货人电话</label>
     </div>
 
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" value="remember-me"/> Remember me
-        </label>
+    <div class="form-label-group">
+        <input type="text" id="goods" name="goods" class="form-control" placeholder="Email address"/>
+        <label for="goods">要买物品</label>
     </div>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">登 录</button>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">下单</button>
     <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2018</p>
 </form>
 </body>
