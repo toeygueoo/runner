@@ -28,7 +28,7 @@ public class Order {
     private String store;
     // 送货人电话、
     @Column(length = 50)
-    private String consignerMobiel;
+    private String consignerMobile;
     // 送货人姓名、
     @Column(length = 50)
     private String consigner;
@@ -120,12 +120,12 @@ public class Order {
         this.store = store;
     }
 
-    public String getConsignerMobiel() {
-        return consignerMobiel;
+    public String getConsignerMobile() {
+        return consignerMobile;
     }
 
-    public void setConsignerMobiel(String consignerMobiel) {
-        this.consignerMobiel = consignerMobiel;
+    public void setConsignerMobile(String consignerMobile) {
+        this.consignerMobile = consignerMobile;
     }
 
     public String getConsigner() {

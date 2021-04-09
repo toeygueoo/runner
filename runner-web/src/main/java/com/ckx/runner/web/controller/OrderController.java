@@ -7,6 +7,10 @@ import com.ckx.runner.web.form.OrderForDeliverForm;
 import com.ckx.runner.web.form.OrderForSellForm;
 import com.ckx.runner.web.form.OrderForTakeForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -112,7 +116,7 @@ public class OrderController {
         Order order = new Order();
 
         order.setConsigner(orderForDeliverForm.getConsigner());
-        order.setConsignerMobiel(orderForDeliverForm.getConsignerMobiel());
+        order.setConsignerMobile(orderForDeliverForm.getConsignerMobile());
         order.setConsignee(orderForDeliverForm.getConsignee());
         order.setConsigneeMobile(orderForDeliverForm.getConsigneeMobile());
         order.setGoods(orderForDeliverForm.getGoods());
@@ -167,7 +171,7 @@ public class OrderController {
         order.setConsignee(orderForTakeForm.getConsignee());
         order.setConsigneeMobile(orderForTakeForm.getConsigneeMobile());
         order.setGoods(orderForTakeForm.getGoods());
-        order.setType(2);
+        order.setType(3);
 
         //2.下单客户ID，数据来源session
         Customer customer = (Customer) session.getAttribute("customer");
@@ -182,6 +186,25 @@ public class OrderController {
         }
 
 
+    }
+
+    /**
+     * 订单列表分页
+     * @param start 起始位置
+     * @param limit 每页显示多少条记录
+     * @param model
+     * @return
+     */
+    @GetMapping("/lists")
+    public String lists(@RequestParam(defaultValue = "0", value = "start") Integer start,
+                        @RequestParam(defaultValue = "2", value = "limit") Integer limit,
+                        Model model){
+
+        Sort sort = new Sort(Sort.DEFAULT_DIRECTION, "id");
+        Pageable pageable = new PageRequest(start, limit, sort);
+        Page<Order> page = orderService.list(pageable);
+        model.addAttribute("page", page);
+        return "order/lists";
     }
 
     private String getErrorMessage(BindingResult bindingResult){

@@ -23,10 +23,10 @@
 
     <div class="navbar-collapse collapse" id="navbarsExample03" style="">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" th:href="@{/order/index}">我要下单 <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link" th:href="@{/order/lists}">我的订单</a>
             </li>
         </ul>
@@ -40,15 +40,59 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-sm-4 box-shadow">
-            <a th:href="@{/order/addForSell}" class="btn btn-lg btn-block btn-outline-primary">帮我买</a>
-        </div>
-        <div class="col-sm-4 box-shadow">
-            <a th:href="@{/order/addForDeliver}" class="btn btn-lg btn-block btn-primary">帮我送</a>
-        </div>
-        <div class="col-sm-4 box-shadow">
-            <a th:href="@{/order/addForTake}" class="btn btn-lg btn-block btn-primary">帮我取</a>
-        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>订单类型</th>
+                <th>收货人姓名</th>
+                <th>收货人电话</th>
+                <th>送货人姓名</th>
+                <th>送货人电话</th>
+                <th>帮送/买/取物品</th>
+                <th>取货地址</th>
+                <th>买货商店</th>
+                <th>订单状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${page.content}">
+                <td>#</td>
+                <td>
+                    <span th:if="${item.type == 1}">帮买</span>
+                    <span th:if="${item.type == 2}">帮送</span>
+                    <span th:if="${item.type == 3}">帮取</span>
+                </td>
+                <td th:text="${item.consignee}">#</td>
+                <td th:text="${item.consigneeMobile}">#</td>
+                <td th:text="${item.consigner}">#</td>
+                <td th:text="${item.consignerMobile}">#</td>
+                <td th:text="${item.goods}">#</td>
+                <td th:text="${item.pickupAddress}">#</td>
+                <td th:text="${item.store}">#</td>
+                <td>
+                    <span th:if="${item.status == 1}">下单成功</span>
+                    <span th:if="${item.status == 2}">已指派</span>
+                    <span th:if="${item.status == 3}">配送中</span>
+                </td>
+                <td>
+                    <a th:href="@{/order/detail(id=${item.id})}">详情</a>
+
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="10">
+                    <a th:href="@{/order/lists(start=0)}">[首页]</a>&nbsp;&nbsp;
+                    <a th:if="${not page.isFirst()}" th:href="@{/order/lists(start=${page.number-1})}">[上页]</a>&nbsp;&nbsp;
+                    <a th:if="${not page.isLast()}" th:href="@{/order/lists(start=${page.number+1})}">[下页]</a>&nbsp;&nbsp;
+                    <a th:href="@{/order/lists(start=${page.totalPages-1})}">[末页]</a>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
     </div>
     <footer class="pt-4 my-md-5 pt-md-5 border-top">
         <div class="row">

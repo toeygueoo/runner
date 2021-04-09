@@ -1,6 +1,5 @@
 package com.ckx.runner.web.form;
 
-
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class OrderForDeliverForm {
@@ -8,7 +7,7 @@ public class OrderForDeliverForm {
     @NotEmpty(message = "送货人姓名不能为空")
     private String consigner;
     @NotEmpty(message = "送货人联系电话不能为空")
-    private String consignerMobiel;
+    private String consignerMobile;
 
     @NotEmpty(message = "收货人姓名不能为空")
     private String consignee;
@@ -25,12 +24,12 @@ public class OrderForDeliverForm {
         this.consigner = consigner;
     }
 
-    public String getConsignerMobiel() {
-        return consignerMobiel;
+    public String getConsignerMobile() {
+        return consignerMobile;
     }
 
-    public void setConsignerMobiel(String consignerMobiel) {
-        this.consignerMobiel = consignerMobiel;
+    public void setConsignerMobile(String consignerMobile) {
+        this.consignerMobile = consignerMobile;
     }
 
     public String getConsignee() {
