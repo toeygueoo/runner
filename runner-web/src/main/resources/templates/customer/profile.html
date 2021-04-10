@@ -6,7 +6,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>客户下单页面</title>
+    <title>客户个人页面</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"/>
@@ -23,14 +23,11 @@
 
     <div class="navbar-collapse collapse" id="navbarsExample03" style="">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" th:href="@{/order/index}">我要下单 <span class="sr-only">(current)</span></a>
+            <li class="nav-customer">
+                <a class="nav-link" th:href="@{/customer/index}">我要下单 <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/order/lists}">我的订单</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/customer/profile}">个人信息</a>
+            <li class="nav-customer active">
+                <a class="nav-link" th:href="@{/customer/lists}">我的订单</a>
             </li>
         </ul>
 
@@ -43,17 +40,54 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-sm-4 box-shadow">
-            <a th:href="@{/order/addForSell}" class="btn btn-lg btn-block btn-outline-primary">帮我买</a>
-        </div>
-        <div class="col-sm-4 box-shadow">
-            <a th:href="@{/order/addForDeliver}" class="btn btn-lg btn-block btn-primary">帮我送</a>
-        </div>
-        <div class="col-sm-4 box-shadow">
-            <a th:href="@{/order/addForTake}" class="btn btn-lg btn-block btn-primary">帮我取</a>
-        </div>
+        <div th:if="${tip} != null" class="alert alert-success" th:text="${tip}"></div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>登录账号</th>
+                <th>客户昵称</th>
+                <th>登录密码</th>
+                <th>是否配送员</th>
+                <th>申请状态</th>
+                <th>手机号码</th>
+                <th>注册时间</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>#</td>
+                <td th:text="${customer.username}">#</td>
+                <td th:text="${customer.nickname}">#</td>
+                <td th:text="${customer.password}">#</td>
+                <td>
+                   <span th:if="${customer.type == 1}">否
+
+                   </span>
+                    <span th:if="${customer.type == 2}">是</span>
+                </td>
+                <td>
+                   <span th:if="${customer.applyStatus == 0}">未申请
+                    <a th:href="@{/customer/apply}">申请</a>
+                   </span>
+                    <span th:if="${customer.applyStatus == 1}">申请中</span>
+                    <span th:if="${customer.applyStatus == 2}">申请通过</span>
+                    <span th:if="${customer.applyStatus == 9}">申请不通过
+                    <a th:href="@{/customer/apply}">申请</a>
+                   </span>
+                </td>
+
+                <td th:text="${customer.mobile}">#</td>
+                <td th:text="${#dates.format(customer.registTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+
+            </tr>
+            </tbody>
+        </table>
+
     </div>
-    <footer class="pt-4 my-md-5 pt-md-5 border-top">
+    <footer class="pt-4 my-md-5 pt-md-5 bcustomer-top">
         <div class="row">
             <div class="col-12 col-md">
                 <img class="mb-2" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="24"

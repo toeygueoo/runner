@@ -75,10 +75,14 @@
                     <span th:if="${item.status == 1}">下单成功</span>
                     <span th:if="${item.status == 2}">已指派</span>
                     <span th:if="${item.status == 3}">配送中</span>
+                    <span th:if="${item.status == 4}">已送达</span>
+                    <span th:if="${item.status == 5}">已收货</span>
+                    <span th:if="${item.status == 6}">已评价</span>
                 </td>
                 <td>
                     <a th:href="@{/order/detail(id=${item.id})}">详情</a>
-
+                    <a th:href="@{/order/confirm(id=${item.id})}">确认收货</a>
+                    <a th:href="@{/order/evaluate(id=${item.id})}">评价</a>
                 </td>
             </tr>
             </tbody>

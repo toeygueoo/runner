@@ -1,5 +1,6 @@
 package com.ckx.runner.core.service.impl;
 
+
 import com.ckx.runner.core.domain.Customer;
 import com.ckx.runner.core.repository.CustomerRepository;
 import com.ckx.runner.core.service.CustomerService;
@@ -7,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
@@ -16,6 +19,7 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public Customer register(Customer customer) {
+        customer.setRegistTime(new Date());
         return customerRepository.save(customer);
     }
 

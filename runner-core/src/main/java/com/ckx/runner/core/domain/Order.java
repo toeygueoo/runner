@@ -3,6 +3,7 @@ package com.ckx.runner.core.domain;
 import javax.persistence.*;
 import java.util.Date;
 
+
 /**
  * 订单实体类
  */
@@ -64,6 +65,7 @@ public class Order {
     //什么时候确认收货
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date deliveryTime;
+
     //什么时候评价
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date evaluateTime;
