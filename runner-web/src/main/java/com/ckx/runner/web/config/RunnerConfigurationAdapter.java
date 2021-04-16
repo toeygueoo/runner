@@ -1,5 +1,6 @@
 package com.ckx.runner.web.config;
 
+
 import com.ckx.runner.web.interceptor.LoginInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

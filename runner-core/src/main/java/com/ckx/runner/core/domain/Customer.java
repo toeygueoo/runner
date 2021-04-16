@@ -1,5 +1,6 @@
 package com.ckx.runner.core.domain;
 
+
 import javax.persistence.*;
 import java.util.Date;
 
