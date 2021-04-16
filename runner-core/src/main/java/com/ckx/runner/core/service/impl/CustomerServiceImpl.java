@@ -1,6 +1,7 @@
 package com.ckx.runner.core.service.impl;
 
 
+
 import com.ckx.runner.core.domain.Customer;
 import com.ckx.runner.core.repository.CustomerRepository;
 import com.ckx.runner.core.service.CustomerService;
@@ -9,7 +10,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Transient;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class CustomerServiceImpl implements CustomerService{
@@ -17,6 +20,7 @@ public class CustomerServiceImpl implements CustomerService{
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Transient
     @Override
     public Customer register(Customer customer) {
         customer.setRegistTime(new Date());
@@ -38,11 +42,13 @@ public class CustomerServiceImpl implements CustomerService{
         return customerRepository.getOne(id);
     }
 
+    @Transient
     @Override
     public Customer update(Customer customer) {
         return customerRepository.save(customer);
     }
 
+    @Transient
     @Override
     public Customer applyToDistributor(Long id) {
 
@@ -54,21 +60,26 @@ public class CustomerServiceImpl implements CustomerService{
         return customerRepository.save(customer);
     }
 
+    @Transient
     @Override
-    public Boolean confirmToDistributor(Long id, Integer status) throws Exception {
+    public Customer confirmToDistributor(Long id, Integer status) throws Exception {
         //通过id获取顾客信息
         Customer customer = customerRepository.findOne(id);
         //修改申请状态
         if (status == 2){
             customer.setApplyStatus(status);
             customer.setType(2);
-            return true;
         }else if(status == 9){
             customer.setApplyStatus(status);
-            return false;
 
         }else{
             throw new Exception("参数错误");
         }
+        return customerRepository.save(customer);
+    }
+
+    @Override
+    public List<Customer> listAllDistributor() {
+        return customerRepository.findByType(2);
     }
 }

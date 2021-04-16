@@ -1,11 +1,11 @@
 package com.ckx.runner;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+        import org.springframework.boot.SpringApplication;
+        import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class RunneradminApplication {
+public class RunnerAdminApplication {
     public static void main(String[] args) {
-        SpringApplication.run(RunneradminApplication.class, args);
+        SpringApplication.run(RunnerAdminApplication.class, args);
     }
 }
